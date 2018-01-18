@@ -3,9 +3,21 @@ import requests
 from API_KEYS import *
 
 BASE_URL = 'http://apilayer.net/api'
+LIVE = '/live' #for live results
+CURRENCIES = '&currencies='
+SOURCE = '&source='
+FORMAT = '&format=1'
+LIST = '/list' 
+LIST_CURR = ['CAD', 'JPY', 'INR', 'GBP', 'AUD', 'USD']
 
-### '/list' returns all curriences supported
-LIST = '/list'
+print BASE_URL+LIVE+API_TOKEN1+CURRENCIES+','.join(LIST_CURR)
+
+def USD_Exchanges():
+	rates = requests.get(BASE_URL+LIVE+API_TOKEN1+CURRENCIES+','.join(LIST_CURR)+SOURCE+'USD'+FORMAT)
+	print rates.text
+
+USD_Exchanges()
+
 
 #list of all curriences
 #res = requests.get(BASE_URL + LIST + API_TOKEN1)
@@ -15,9 +27,9 @@ LIST = '/list'
 currencies = [] #stores a copy of the currencies which will be used (for the API)
 
 #copy the list of currencies into variable currencies
-def get_currencies(copy):
-    global currencies
-    currencies = copy
+#def get_currencies(copy):
+#    global currencies
+#    currencies = copy
 
 #create the currency exchange values as directed edges of the graph and return as array or something
-def create_edges():
+#def create_edges():
