@@ -1,35 +1,37 @@
 import json
 import requests
+import itertools
 from API_KEYS import *
 
-BASE_URL = 'http://apilayer.net/api'
-LIVE = '/live' #for live results
-CURRENCIES = '&currencies='
+BASE_URL = 'https://forex.1forge.com/1.0.2'
+QUOTES = '/quotes?pairs='
+CURRENCIES = ['USD', 'CAD', 'GBP', 'JPY', 'INR']
 SOURCE = '&source='
-FORMAT = '&format=1'
-LIST = '/list' 
-LIST_CURR = ['CAD', 'JPY', 'INR', 'GBP', 'AUD', 'USD']
 
-print BASE_URL+LIVE+API_TOKEN1+CURRENCIES+','.join(LIST_CURR)
+def get_all_exhange_rates(all_combos):
 
-def USD_Exchanges():
-	rates = requests.get(BASE_URL+LIVE+API_TOKEN1+CURRENCIES+','.join(LIST_CURR)+SOURCE+'USD'+FORMAT)
-	print rates.text
+	all_combos = ','.join(all_combos) #join all currencies in list
+	rates = requests.get(BASE_URL+QUOTES+all_combos+API_TOKEN1) #get rates from API 
+	exhange_rates = json.loads(rates.content) #load into json format
+	all_info = json.dumps(exhange_rates, indent=4) #get visuals for print
 
-USD_Exchanges()
+	return all_info, all_combos
 
 
-#list of all curriences
-#res = requests.get(BASE_URL + LIST + API_TOKEN1)
-##print (str(json.loads(res.text)).encode("utf-8")) BELOW IS A SIMPLER WAY TO DO THIS
-#print (str(res.json()).encode("utf-8"))
+def mix_curr(currList):
 
-currencies = [] #stores a copy of the currencies which will be used (for the API)
+	all_combos = []
+	mix_curr = list(itertools.product(currList, currList)) #cross all the curriences
+	for d_curr in mix_curr: 
+		if not d_curr[0] == d_curr[1]: #only join diffrent curriences, ignore the same ones
+			all_combos.append(''.join(d_curr))
+	
+	return all_combos
 
-#copy the list of currencies into variable currencies
-#def get_currencies(copy):
-#    global currencies
-#    currencies = copy
+combos = mix_curr(CURRENCIES)
+a, b = get_all_exhange_rates(combos)
 
-#create the currency exchange values as directed edges of the graph and return as array or something
-#def create_edges():
+print a
+		
+
+
