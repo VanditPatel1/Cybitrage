@@ -9,6 +9,17 @@ QUOTES = '/quotes?pairs='
 CURRENCIES = ['USD', 'CAD', 'GBP', 'JPY', 'INR']
 SOURCE = '&source='
 
+def get_curr_combos():
+
+	all_combos = []
+	global CURRENCIES
+	mix_curr = list(itertools.product(CURRENCIES, CURRENCIES)) #cross all the curriences
+	for d_curr in mix_curr:
+		if not d_curr[0] == d_curr[1]: #only join diffrent curriences, ignore the same ones
+			all_combos.append(''.join(d_curr))
+
+	return all_combos
+
 def get_all_exhange_rates(all_combos):
 
         all_combos = ','.join(all_combos) #join all currencies in list
@@ -18,25 +29,13 @@ def get_all_exhange_rates(all_combos):
 
         return all_info, all_combos
 
-
-def mix_curr(currList):
-
-        all_combos = []
-        mix_curr = list(itertools.product(currList, currList)) #cross all the curriences
-        for d_curr in mix_curr:
-                if not d_curr[0] == d_curr[1]: #only join diffrent curriences, ignore the same ones
-                        all_combos.append(''.join(d_curr))
-
-        return all_combos
-
-
 def place_in_dict(all_info, all_combos):
         df = pd.DataFrame(all_info)
         return df
 
 
 def get_data():
-	combos = mix_curr(CURRENCIES)
+	combos = get_curr_combos()
 	a, b = get_all_exhange_rates(combos)
 	df = place_in_dict(a, b)
 	return df

@@ -3,4 +3,4 @@ from get_curr import *
 
 #Adjacency Matrix
 
-print get_data()
+print (get_data())
