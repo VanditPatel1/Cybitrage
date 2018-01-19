@@ -6,8 +6,12 @@ from API_KEYS import *
 
 BASE_URL = 'https://forex.1forge.com/1.0.2'
 QUOTES = '/quotes?pairs='
-CURRENCIES = ['USD', 'CAD', 'GBP', 'JPY', 'INR']
+CURRENCIES = ['USD', 'CAD', 'GBP', 'JPY', 'AUD']
 SOURCE = '&source='
+
+def get_num_currencies():
+    global CURRENCIES
+    return len(CURRENCIES)
 
 def get_curr_combos():
 
@@ -23,7 +27,7 @@ def get_curr_combos():
 def get_all_exhange_rates(all_combos):
 
         all_combos = ','.join(all_combos) #join all currencies in list
-        rates = requests.get(BASE_URL+QUOTES+all_combos+API_TOKEN1) #get rates from API
+        rates = requests.get(BASE_URL + QUOTES + all_combos + API_TOKEN1) #get rates from API
         all_info = json.loads(rates.content) #load into json format
         #all_info = json.dumps(exhange_rates, indent=4) #get visuals for print
 
@@ -31,8 +35,10 @@ def get_all_exhange_rates(all_combos):
 
 def place_in_dict(all_info, all_combos):
         df = pd.DataFrame(all_info)
+        df = df.sort_values(by=['symbol'])
+        df = df.reset_index(drop=True)
+        df = df.set_index('symbol')
         return df
-
 
 def get_data():
 	combos = get_curr_combos()
