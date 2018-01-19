@@ -32,10 +32,11 @@ def mix_curr(currList):
 
 def place_in_dict(all_info, all_combos):
         df = pd.DataFrame(all_info)
-        print df
+        return df
 
 
-
-combos = mix_curr(CURRENCIES)
-a, b = get_all_exhange_rates(combos)
-place_in_dict(a, b)
+def get_data():
+	combos = mix_curr(CURRENCIES)
+	a, b = get_all_exhange_rates(combos)
+	df = place_in_dict(a, b)
+	return df
