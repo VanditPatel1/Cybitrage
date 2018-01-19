@@ -1,2 +1,2 @@
-we can plan here
-okay! JERRY WAS HEREDIJGIASDJGISDAJGISDAJI
+-- Need to make Floyd_Warshall Algo
+-- Restructure and generlize curriency picks
