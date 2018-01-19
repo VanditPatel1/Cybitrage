@@ -1,6 +1,7 @@
 import json
 import requests
 import itertools
+import pandas as pd
 from API_KEYS import *
 
 BASE_URL = 'https://forex.1forge.com/1.0.2'
@@ -12,8 +13,8 @@ def get_all_exhange_rates(all_combos):
 
 	all_combos = ','.join(all_combos) #join all currencies in list
 	rates = requests.get(BASE_URL+QUOTES+all_combos+API_TOKEN1) #get rates from API 
-	exhange_rates = json.loads(rates.content) #load into json format
-	all_info = json.dumps(exhange_rates, indent=4) #get visuals for print
+	all_info = json.loads(rates.content) #load into json format
+	#all_info = json.dumps(exhange_rates, indent=4) #get visuals for print
 
 	return all_info, all_combos
 
@@ -28,10 +29,14 @@ def mix_curr(currList):
 	
 	return all_combos
 
+
+def place_in_dict(all_info, all_combos):
+	df = pd.DataFrame(all_info)
+	print df	
+
+
+
 combos = mix_curr(CURRENCIES)
 a, b = get_all_exhange_rates(combos)
-
-print a
-		
-
+place_in_dict(a, b)
 
