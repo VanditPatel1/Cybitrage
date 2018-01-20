@@ -12,7 +12,7 @@ def create_distance_table(curr):
     curr = CURRENCIES                                       # TODO replace this later when inputs are a curriencies list
     distances = {"STA" : 0}                                 # STA stands for START
     for currency in curr:
-        distances[currency] = 0                             # set all starting vertices to be infinite distance away
+        distances[currency] = float('inf')                  # set all starting vertices to be infinite distance away
     # for x in distances:
     #     print (x, distances[x])
     return distances
@@ -54,9 +54,11 @@ class weighted_graph:
         iteration = 1                                                   # keeps track of the iteration number
         num_currencies = get_num_currencies(self.currencies)            # number of currencies
         currency_list = ['STA'] + self.currencies                       # temp list to store currencies + STA node
+        has_arbitrage = False                                           # keeps track of whether arbitrage exists
         print ('NUM CURR: ' + str(num_currencies))
 
         while iteration < num_currencies and updated == True:
+            print (iteration)
             updated = False                                             # reset updated for checking if an update occurs later
             print ('LOOP ACCESSED')
             print (self.currencies)
@@ -65,27 +67,41 @@ class weighted_graph:
                     if (to_curr != from_curr and to_curr != 'STA'):     # ... is a different currency than the first (and is not STA)
 
                         print ('CURRENCY DETECTION: ' + from_curr + to_curr)
-                        print (str(self.dist_table[from_curr] + self.get_weight(from_curr + to_curr)))
+                        print (str(self.dist_table[from_curr] + self.get_weight(from_curr + to_curr)) + " VS " + str(self.dist_table[to_curr]))
                         if self.dist_table[from_curr] + self.get_weight(from_curr + to_curr) < self.dist_table[to_curr]:         # if a shorter path is found to THIS node
+                            print ("UPDATED BELLMAN FORD")
                             self.dist_table[to_curr] = self.dist_table[from_curr] + self.get_weight(from_curr + to_curr)         # update distance table with shorter path distance
                             self.pre_table[to_curr] = from_curr                                                                  # update predecessor table with shorter path node
                             updated = True                                                                                       # an update occurred so updated = True
+                        else:
+                            print ("DID NOT UPDATE.......................................................................................")
 
             iteration = iteration + 1
 
+        print ('===================================================')               # FOR TESTING
+        print (test.dist_table)                             # FOR TESTING
+        print ('===================================================')                # FOR TESTING
+        print (test.pre_table)                              # FOR TESTING
 
         if updated == True:                                             # FINAL ITERATION to detect NEGATIVE WEIGHT CYCLES
 
-            for from_curr in self.currencies:                           # First Loop for each currency
-                for to_curr in self.currencies:                         # Second Loop for each currency that...
-                    if (to_curr != from_curr and to_curr != 'STA'):     # ... is a different currency than the first (and is not STA)
+            iteration = 1
+            while iteration < num_currencies and updated == True:
+                print ("FINAL ITERATION BEGINS-----------------------------------------------------------!!!!!!!!!!!!!!!!!!")
+                updated = False
+                for from_curr in self.currencies:                           # First Loop for each currency
+                    for to_curr in self.currencies:                         # Second Loop for each currency that...
+                        if (to_curr != from_curr and to_curr != 'STA'):     # ... is a different currency than the first (and is not STA)
 
-                        if self.dist_table[from_curr] + self.get_weight(from_curr + to_curr) < self.dist_table[to_curr]:    # negative cycle detected
-                            self.dist_table[to_curr] = float("-inf")                                                        # update distance table with -infinity
-                            self.pre_table[to_curr] = from_curr                                                             # update predecessor table with shorter path node
-                            return True
+                            print ("CURRENCY: " + to_curr + " has dist value: " + str(self.dist_table[to_curr]))
+                            if self.dist_table[from_curr] + self.get_weight(from_curr + to_curr) < self.dist_table[to_curr]:    # negative cycle detected
+                                self.dist_table[to_curr] = float("-inf")                                                        # update distance table with -infinity
+                                print ("CURRENCY: " + to_curr + " has dist value: " + str(self.dist_table[to_curr]))
+                                self.pre_table[to_curr] = from_curr                                                             # update predecessor table with shorter path node
+                                updated = True
+                                has_arbitrage = True
 
-        return False
+        return has_arbitrage
 
     def show_arbitrage_opportunity(self):
 
@@ -94,12 +110,17 @@ class weighted_graph:
         if self.has_arbitrage_opportunity():
 
             for currency in arbitrage_currencies:
+                print ('??' + currency + ': ' + str(self.dist_table[currency]))
                 if self.dist_table[currency] != float("-inf"):      # no arbitrage opportunity detected
+                    print ('??' + currency + ': ' + str(self.dist_table[currency]))
                     arbitrage_currencies.remove(currency)           # remove currency from list of currencies with arbitrage opportunities
 
             # for currency in arbitrage_currencies:
             #     predecessor = pre_table[currency]                 # first predecessor in arbitrage cycle
             #     while predecessor != currency:                    # while the cycle hasn't looped to beginning
+
+        else:
+            arbitrage_currencies = []
 
         for i in arbitrage_currencies:
             print('----------------------')
