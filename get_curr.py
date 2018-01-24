@@ -40,6 +40,7 @@ def place_in_dict(all_info, all_combos, currs):
             df2 = pd.DataFrame(data=d)
             df = df.append(df2, ignore_index=True)
 
+                                                                                                        # TODO USE TEST WEIGHTS AND CREATE CUSTOM WEIGHTS DATAFRAME
         df = df.sort_values(by=['symbol'])
         df = df.reset_index(drop=True)
         df = df.set_index('symbol')
