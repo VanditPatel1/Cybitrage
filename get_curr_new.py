@@ -12,13 +12,12 @@ CURRENCIES = ['USD', 'CAD', 'GBP', 'JPY', 'AUD']
 SOURCE = '&source='
 TIMESTAMP = '???' #set every call
 
-def get_num_currencies(currs):
-    return len(currs)
 
 def get_curr_combos(combos):
 
-    ''' Makes four lists each contains curriencies that
-        complement its opposing list at the same index
+    '''
+    Makes four lists each contains curriencies that
+    complement its opposing list at the same index
     '''
 
     _to = []
@@ -63,7 +62,7 @@ def get_df_matrix(all_info, all_combos, _to, _from, _to_same, _from_same):
         '''
         Sort all JSON and lists into a clean
         dataframe and matrix containing important
-        values to be passed onto algorithim module
+        values to be passed onto algorithm module
         '''
 
         df = pd.DataFrame(all_info)
