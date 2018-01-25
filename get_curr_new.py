@@ -12,8 +12,6 @@ CURRENCIES = ['USD', 'CAD', 'GBP', 'JPY', 'AUD']
 SOURCE = '&source='
 TIMESTAMP = '???' #set every call
 
-def get_num_currencies(currs):
-    return len(currs)
 
 def get_curr_combos(combos):
 

@@ -52,7 +52,7 @@ class weighted_graph:
         print ('STARTING BELLMAN FORD')
         updated = True                                                  # keeps track of whether an update was made or not
         iteration = 1                                                   # keeps track of the iteration number
-        num_currencies = get_num_currencies(self.currencies)            # number of currencies
+        num_currencies = len(self.currencies)                           # number of currencies
         currency_list = ['STA'] + self.currencies                       # temp list to store currencies + STA node
         has_arbitrage = False                                           # keeps track of whether arbitrage exists
         print ('NUM CURR: ' + str(num_currencies))
