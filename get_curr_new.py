@@ -43,15 +43,15 @@ def get_all_exhange_rates(_to, _from):
     Get all exhange rates for currency A to B in JSON
     '''
 
-        all_combos = []
-        for x in range(0, len(_to)):
-            all_combos.append(_from[x]+_to[x])
+    all_combos = []
+    for x in range(0, len(_to)):
+        all_combos.append(_from[x]+_to[x])
 
-        all_combos = ','.join(all_combos)                                       # join all currencies in list
-        rates = requests.get(BASE_URL + QUOTES + all_combos + API_TOKEN1)       # get rates from API
-        all_info = json.loads(rates.content)                                    # load into json format
+    all_combos = ','.join(all_combos)                                       # join all currencies in list
+    rates = requests.get(BASE_URL + QUOTES + all_combos + API_TOKEN1)       # get rates from API
+    all_info = json.loads(rates.content)                                    # load into json format
 
-        return all_info, all_combos
+    return all_info, all_combos
 
 
 def edge_val(val):
