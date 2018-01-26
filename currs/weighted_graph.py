@@ -57,7 +57,8 @@ class weighted_graph:
         num_currencies = len(self.currencies)                           # number of currencies
         currency_list = self.currencies                                 # temp list to store currencies
 
-        dist_table = create_distance_table(currency_list)               # shortest path table
+        dist_table = create_distance_table(currency_list)
+        print dist_table             # shortest path table
         dist_table[start] = 0                                           # set up start node
         pre_table = create_predecessor_table(currency_list)             # predecessor table
 
@@ -81,7 +82,8 @@ class weighted_graph:
 
                         if dist_table[from_curr] + self.get_weight(from_curr + to_curr) < dist_table[to_curr]:    # negative cycle detected
                             # Display the arbitrage opportunity using the predecessors table
-                            return show_negative_weight_cycle(pre_table, to_curr)
+                            #print show_negative_weight_cycle(pre_table, to_curr)
+                            continue
 
         # No negative cycles detected
         return None
@@ -102,5 +104,5 @@ class weighted_graph:
 
 
 
-test = weighted_graph(['USD', 'CAD', 'GBP', 'JPY', 'AUD'])
-arb = test.show_arbitrage_opportunities()
+#test = weighted_graph(['USD', 'CAD', 'GBP', 'JPY', 'AUD'])
+#arb = test.show_arbitrage_opportunities()
