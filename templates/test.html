@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<form action="{{ url_for('currs') }}" method='post'>
+  <fieldset>
+
+    <div class="checkbox">
+      <label><input type="checkbox" name='currencies' value="CAD">CAD</label>
+    </div>
+
+    <div class="checkbox">
+      <label><input type="checkbox" name='currencies' value="AUD">AUD</label>
+    </div>
+
+    <div class="checkbox">
+      <label><input type="checkbox" name='currencies' value="USD">USD</label>
+    </div>
+
+    <div class="checkbox">
+      <label><input type="checkbox" name='currencies' value="JYP">JYP</label>
+    </div>
+
+    <div class="checkbox">
+      <label><input type="checkbox" name='currencies' value="GBP">GBP</label>
+    </div>
+
+    <div>
+      <button type="submit">Sumbit!</button>
+    </div>
+
+  </fieldset>
+</form>
+
+
+
+
+</html>
