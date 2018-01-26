@@ -5,12 +5,7 @@ import pandas as pd
 import numpy as np
 import math
 from API_KEYS import *
-
-BASE_URL = 'https://forex.1forge.com/1.0.2'
-QUOTES = '/quotes?pairs='
-CURRENCIES = ['USD', 'CAD', 'GBP', 'JPY', 'AUD']
-SOURCE = '&source='
-TIMESTAMP = '???' #set every call
+from config import *
 
 
 def get_curr_combos(combos):
@@ -70,13 +65,12 @@ def get_df_matrix(all_info, all_combos, _to, _from, _to_same, _from_same):
         df['to'] = _to #add extra 'to' and 'from' columns for easier accessability
         df['from'] = _from
 
-        global TIMESTAMP
-        TIMESTAMP = df.loc[(0), ('timestamp')] #set time for this dataset
+        timestamp = df.loc[(0), ('timestamp')] #set time for this dataset
 
         for x in range(0, len(_to_same)):
             d = {'ask': [1], 'bid': [1], 'price': [1], \
                 'symbol':[_to_same[x] + _from_same[x]], \
-                'timestamp': TIMESTAMP, 'edge_weight': [0], \
+                'timestamp': timestamp, 'edge_weight': [0], \
                 'to': [_to_same[x]], 'from': [_from_same[x]]}
 
             df2 = pd.DataFrame(data=d)
@@ -102,3 +96,8 @@ def get_data(currs):
     df, matrix = get_df_matrix(a, b, _to, _from, _to_same, _from_same)
 
     return df, matrix
+
+a, b = get_data(CURRENCIES)
+
+print a
+print b
