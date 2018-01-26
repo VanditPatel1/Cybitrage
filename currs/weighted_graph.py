@@ -54,12 +54,18 @@ class weighted_graph:
 
         updated = True                                                  # keeps track of whether an update was made or not
         iteration = 1                                                   # keeps track of the iteration number
+<<<<<<< HEAD:weighted_graph.py
         num_currencies = get_num_currencies(self.currencies)            # number of currencies
         currency_list = self.currencies                                 # temp list to store currencies
 
         dist_table = create_distance_table(currency_list)               # shortest path table
         dist_table[start] = 0                                           # set up start node
         pre_table = create_predecessor_table(currency_list)             # predecessor table
+=======
+        num_currencies = len(self.currencies)                           # number of currencies
+        currency_list = ['STA'] + self.currencies                       # temp list to store currencies + STA node
+        has_arbitrage = False                                           # keeps track of whether arbitrage exists
+>>>>>>> origin/master:currs/weighted_graph.py
 
         # FIRST |V-1| ITERATIONS
         while iteration < num_currencies and updated == True:
