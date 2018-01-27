@@ -6,17 +6,13 @@ def create_distance_table(curr):
     distances = {}
     for currency in curr:
         distances[currency] = float('inf')                  # set all starting vertices to be infinite distance away
-    # for x in distances:
-    #     print (x, distances[x])
     return distances
 
 def create_predecessor_table(curr):
 
     predecessor = {}
     for currency in curr:
-        predecessor[currency] = None                        #set all starting vertices to have no predecessor
-    # for x in predecessor:
-    #     print (x, predecessor[x])
+        predecessor[currency] = None                        # set all starting vertices to have no predecessor
     return predecessor
 
 def show_negative_weight_cycle(predecessors, node):
@@ -41,9 +37,9 @@ class weighted_graph:
 
         self.currencies = currs                                         # list of currencies
         self.curr_df, self.curr_matrix = get_data(currs)                # currency data frame (with listings of all edges)
+        print('TESTING WEIGHTED GRAPH')
         print (self.curr_df)
-        print ('------------')
-        print (self.curr_matrix)
+        print ('\n')
 
     def get_weight(self, edge):
 
@@ -58,12 +54,13 @@ class weighted_graph:
         currency_list = self.currencies                                 # temp list to store currencies
 
         dist_table = create_distance_table(currency_list)
-        print dist_table             # shortest path table
         dist_table[start] = 0                                           # set up start node
         pre_table = create_predecessor_table(currency_list)             # predecessor table
 
         # FIRST |V-1| ITERATIONS
         while iteration < num_currencies and updated == True:
+            print (dist_table)             # shortest path table
+            print (pre_table)              # predecessor table
             updated = False                                             # reset updated for checking if an update occurs later
             for from_curr in currency_list:                             # First Loop for each currency
                 for to_curr in currency_list:                           # Second Loop for each currency that
@@ -75,6 +72,10 @@ class weighted_graph:
 
             iteration = iteration + 1
 
+        print (dist_table)             # shortest path table
+        print (pre_table)              # predecessor table
+        print ('\n')
+
         # FINAL ITERATION to detect NEGATIVE WEIGHT CYCLES
         if updated == True:
             for from_curr in currency_list:                           # First Loop for each currency
@@ -82,8 +83,7 @@ class weighted_graph:
 
                         if dist_table[from_curr] + self.get_weight(from_curr + to_curr) < dist_table[to_curr]:    # negative cycle detected
                             # Display the arbitrage opportunity using the predecessors table
-                            #print show_negative_weight_cycle(pre_table, to_curr)
-                            continue
+                            return show_negative_weight_cycle(pre_table, start)
 
         # No negative cycles detected
         return None
@@ -104,5 +104,5 @@ class weighted_graph:
 
 
 
-#test = weighted_graph(['USD', 'CAD', 'GBP', 'JPY', 'AUD'])
-#arb = test.show_arbitrage_opportunities()
+test = weighted_graph(['USD', 'CAD', 'GBP', 'JPY', 'AUD'])
+arb = test.show_arbitrage_opportunities()

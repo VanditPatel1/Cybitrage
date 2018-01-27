@@ -99,5 +99,5 @@ def get_data(currs):
 
 a, b = get_data(CURRENCIES)
 
-print (a)
-print (b)
+#print (a)
+#print (b)

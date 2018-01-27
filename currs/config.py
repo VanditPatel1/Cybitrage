@@ -7,4 +7,5 @@ SOURCE = '&source='
 
 all_currs = ['EUR', 'USD', 'JPY', 'CHF', 'AUD', 'CAD', 'NZD', 'GBP', 'SEK' \
                 'NOK', 'MXN', 'TRY', 'ZAR', 'CNH', 'XAU', 'XAG']
-print len(all_currs)
+
+print (len(all_currs))
