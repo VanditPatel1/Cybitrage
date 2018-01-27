@@ -46,6 +46,11 @@ class weighted_graph:
         edge_rate = self.curr_df.get_value(edge, 'edge_weight')         # edge weights based on NEGATIVE LOG-EXCHANGE RATE
         return edge_rate
 
+    def get_default_weight(self, edge):
+
+        edge_rate = self.curr_df.get_value(edge, 'ask')                 # edge weights based on ASK RATE
+        return edge_rate
+
     def bellmanford(self, start):
 
         updated = True                                                  # keeps track of whether an update was made or not
@@ -93,8 +98,16 @@ class weighted_graph:
         arbitrage_opportunities = []
         for curr in self.currencies:
             arbitrage = self.bellmanford(curr)
-            if arbitrage is not None and arbitrage not in arbitrage_opportunities:
-                arbitrage_opportunities.append(arbitrage)
+            if arbitrage is not None and arbitrage not in arbitrage_opportunities:      # if a new potential arbitrage opportunity exists
+                # Test the arbitrage opportunity for more than 2% yield per cycle
+                arb_yield = 1
+                for i in range (1, len(arbitrage)):
+                    edge = arbitrage[i-1] + arbitrage[i]                                # string value representing the edge
+                    print (edge)
+                    arb_yield = arb_yield * self.get_default_weight(edge)
+
+                if arb_yield > 1.02:
+                    arbitrage_opportunities.append(arbitrage)
 
         print ("ARBITRAGE: " + str(arbitrage_opportunities))
         return arbitrage_opportunities
