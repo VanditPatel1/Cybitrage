@@ -81,6 +81,9 @@ def get_df_matrix(all_info, all_combos, _to, _from, _to_same, _from_same):
         df = df.set_index('symbol')
 
         matrix = df.pivot(index='from', columns='to', values='edge_weight')
+
+        # df = pd.DataFrame.from_csv('C:/Users/Gushihahapro/Documents/Github/shortest_path/currs/test_file.csv')        # TODO THIS DATAFRAME IS FOR TESTING BASED ON THE TESTING_FILE.CSV VALUES 
+
         return df, matrix
 
 def get_data(currs):

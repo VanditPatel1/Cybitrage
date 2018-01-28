@@ -72,7 +72,7 @@ class weighted_graph:
 
                         if dist_table[from_curr] + self.get_weight(from_curr + to_curr) < dist_table[to_curr]:              # if a shorter path is found to THIS node
                             dist_table[to_curr] = dist_table[from_curr] + self.get_weight(from_curr + to_curr)              # update distance table with shorter path distance
-                            pre_table[to_curr] = from_curr                                                                  # update predecessor table with shorter path node
+                            pre_table[from_curr] = to_curr                                                                  # update predecessor table with shorter path node
                             updated = True                                                                                  # an update occurred so updated = True
 
             iteration = iteration + 1
@@ -81,14 +81,23 @@ class weighted_graph:
         #print (pre_table)              # predecessor table
         #print ('\n')
 
-        # FINAL ITERATION to detect NEGATIVE WEIGHT CYCLES
+        # FINAL ITERATIONS to detect NEGATIVE WEIGHT CYCLES
         if updated == True:
-            for from_curr in currency_list:                           # First Loop for each currency
-                for to_curr in currency_list:                         # Second Loop for each currency that
+            iteration = 1
+            while iteration < num_currencies and updated == True:
+                updated = False
+                for from_curr in currency_list:                           # First Loop for each currency
+                    for to_curr in currency_list:                         # Second Loop for each currency that
 
-                        if dist_table[from_curr] + self.get_weight(from_curr + to_curr) < dist_table[to_curr]:    # negative cycle detected
-                            # Display the arbitrage opportunity using the predecessors table
-                            return show_negative_weight_cycle(pre_table, start)
+                            if dist_table[from_curr] + self.get_weight(from_curr + to_curr) < dist_table[to_curr]:    # negative cycle detected
+                                dist_table[to_curr] = float('-inf')                                                   # update distance table with shorter path distance
+                                pre_table[from_curr] = to_curr                                                        # update predecessor table with shorter path node
+                                updated = True
+
+                iteration = iteration + 1
+
+            # Display the arbitrage opportunity using the predecessors table
+            return show_negative_weight_cycle(pre_table, start)
 
         # No negative cycles detected
         return None
@@ -99,12 +108,14 @@ class weighted_graph:
         for curr in self.currencies:
             arbitrage = self.bellmanford(curr)
             if arbitrage is not None and arbitrage not in arbitrage_opportunities:      # if a new potential arbitrage opportunity exists
+
                 # Test the arbitrage opportunity for more than 2% yield per cycle
                 arb_yield = 1
                 for i in range (1, len(arbitrage)):
                     edge = arbitrage[i-1] + arbitrage[i]                                # string value representing the edge
                     print (edge)
                     arb_yield = arb_yield * self.get_default_weight(edge)
+                    print (str(arb_yield))
 
                 if arb_yield > 1.02:
                     arbitrage_opportunities.append(arbitrage)
