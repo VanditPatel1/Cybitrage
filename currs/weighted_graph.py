@@ -37,9 +37,9 @@ class weighted_graph:
 
         self.currencies = currs                                         # list of currencies
         self.curr_df, self.curr_matrix = get_data(currs)                # currency data frame (with listings of all edges)
-        print('TESTING WEIGHTED GRAPH')
-        print (self.curr_df)
-        print ('\n')
+        #print('TESTING WEIGHTED GRAPH')
+        #print (self.curr_df)
+        #print ('\n')
 
     def get_weight(self, edge):
 
@@ -64,8 +64,8 @@ class weighted_graph:
 
         # FIRST |V-1| ITERATIONS
         while iteration < num_currencies and updated == True:
-            print (dist_table)             # shortest path table
-            print (pre_table)              # predecessor table
+            #print (dist_table)             # shortest path table
+            #print (pre_table)              # predecessor table
             updated = False                                             # reset updated for checking if an update occurs later
             for from_curr in currency_list:                             # First Loop for each currency
                 for to_curr in currency_list:                           # Second Loop for each currency that
@@ -77,9 +77,9 @@ class weighted_graph:
 
             iteration = iteration + 1
 
-        print (dist_table)             # shortest path table
-        print (pre_table)              # predecessor table
-        print ('\n')
+        #print (dist_table)             # shortest path table
+        #print (pre_table)              # predecessor table
+        #print ('\n')
 
         # FINAL ITERATION to detect NEGATIVE WEIGHT CYCLES
         if updated == True:
@@ -117,5 +117,5 @@ class weighted_graph:
 
 
 
-test = weighted_graph(['USD', 'CAD', 'GBP', 'JPY', 'AUD'])
-arb = test.show_arbitrage_opportunities()
+#test = weighted_graph(['USD', 'CAD', 'GBP', 'JPY', 'AUD'])
+#arb = test.show_arbitrage_opportunities()

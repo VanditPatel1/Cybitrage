@@ -17,9 +17,11 @@ def currs():
     return redirect('/test')
 
 def get_df(data):
+    print data
     w = weighted_graph(data)
 
 
+#
 
 if __name__ == '__main__':
     app.run(debug='on')

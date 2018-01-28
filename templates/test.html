@@ -1,42 +1,104 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<form action="{{ url_for('currs') }}" method='post'>
-  <fieldset>
-    <div>
-    <label class="checkbox-inline"><input type="checkbox" value="CAD">CAD</label>
-    <label class="checkbox-inline"><input type="checkbox" value="AUD">AUD</label>
-    <label class="checkbox-inline"><input type="checkbox" value="USD">USD</label>
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox" name='currencies' value="CAD">CAD</label>
-    </div>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='s.css') }}">
 
-    <div class="checkbox">
-      <label><input type="checkbox" name='currencies' value="AUD">AUD</label>
-    </div>
 
-    <div class="checkbox">
-      <label><input type="checkbox" name='currencies' value="USD">USD</label>
-    </div>
+<div class="jumbotron text-center">
+  <h1>ARBITRAGE FINDER</h1>
+  <p>Supports 16 currencies!</p>
+</div>
 
-    <div class="checkbox">
-      <label><input type="checkbox" name='currencies' value="JPY">JPY</label>
-    </div>
+<div class="container-fluid">
+  <div class="row">
 
-    <div class="checkbox">
-      <label><input type="checkbox" name='currencies' value="GBP">GBP</label>
-    </div>
+    <div class="col-sm-4">
+      <form action="{{ url_for('currs') }}" method='post'>
+        <fieldset>
+          <div class="text-center">
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="CAD">CAD</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="AUD">AUD</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="USD">USD</label>
+            </div>
+          </div>
 
-    <div>
-      <button type="submit">Sumbit!</button>
-    </div>
+          <div class="text-center">
+            <div class="col-sm-4">
+              <label class="checkbox-inline" ><input type="checkbox" name='currencies' value="EUR">EUR</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="JPY">JPY</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="CHF">CHF</label>
+            </div>
+          </div>
 
-  </fieldset>
-</form>
+          <div class="text-center">
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="NZD">NZD</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="GBP">GBP</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="SEK">SEK</label>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="NOK">NOK</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="MXN">MXN</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="TRY">TRY</label>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="ZAR">ZAR</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="CNH">CNH</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="checkbox-inline"><input type="checkbox" name='currencies' value="XAU">XAU</label>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <span class="submit-currs" id="sumbit-currs">
+              <button type="submit">Sumbit!</button>
+
+            </span>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+
+        </div>
+
+        <div class="col-sm-4">
+        </div>
+
+        </fieldset>
+      </form>
+    </div>
 
 
 </html>

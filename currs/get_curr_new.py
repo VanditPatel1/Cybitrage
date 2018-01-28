@@ -101,3 +101,4 @@ a, b = get_data(CURRENCIES)
 
 #print (a)
 #print (b)
+#
