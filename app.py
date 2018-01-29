@@ -3,9 +3,10 @@ from currs.weighted_graph import weighted_graph
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET'])
+
 @app.route('/test', methods=['GET', 'POST'])
 def home():
+
     return render_template('test.html')
 
 
@@ -13,7 +14,9 @@ def home():
 def currs():
 
     c = request.form.getlist('currencies')
-    get_df(c)
+    print c
+    if len(c) > 1:
+        get_df(c)
     return redirect('/test')
 
 def get_df(data):

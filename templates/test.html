@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='s.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/s.css') }}">
 
 
 <div class="jumbotron text-center">
@@ -19,7 +19,7 @@
   <div class="row">
 
     <div class="col-sm-4">
-      <form action="{{ url_for('currs') }}" method='post'>
+      <form action="{{ url_for('currs') }}" method='post' role='form'>
         <fieldset>
           <div class="text-center">
             <div class="col-sm-4">
@@ -83,22 +83,61 @@
 
           <div class="text-center">
             <span class="submit-currs" id="sumbit-currs">
-              <button type="submit">Sumbit!</button>
+              <button type="submit" onclick="myCreateFunction()">Sumbit!</button>
 
             </span>
           </div>
-        </div>
+    </div>
 
-        <div class="col-sm-4">
+    <div class="col-sm-4">
+        <table class="table table-striped" id="curriences-table">
+          <thead>
+            <tr>
+              <th>To</th>
+              <th>From</th>
+              <th>Ask</th>
+              <th>Bid</th>
+              <th>Price</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John</td>
+              <td>Doe</td>
+              <td>john@example.com</td>
+              <td>Mary</td>
+              <td>Moe</td>
+              <td>mary@example.com</td>
+            </tr>
+            <tr>
+              <td>Mary</td>
+              <td>Moe</td>
+              <td>mary@example.com</td>
+              <td>Mary</td>
+              <td>Moe</td>
+              <td>mary@example.com</td>
+            </tr>
+            <tr>
+              <td>July</td>
+              <td>Dooley</td>
+              <td>july@example.com</td>
+              <td>Mary</td>
+              <td>Moe</td>
+              <td>mary@example.com</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
 
-        </div>
+    <div class="col-sm-4">
 
-        <div class="col-sm-4">
-        </div>
+    </div>
 
         </fieldset>
       </form>
     </div>
 
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </html>
