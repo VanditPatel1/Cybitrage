@@ -13,10 +13,15 @@ def home():
 
     if request.method == 'POST':
         c = request.form.getlist('currencies')
-        w = weighted_graph(c)
-        currs = w.curr_df
-        currs = currs.to_dict(orient='dict')
-        print currs
+        if len(c) > 1:
+            w = weighted_graph(c)
+            currs = w.curr_df
+            currs = currs.to_dict(orient='records')
+            #print currs
+
+            for curr in currs:
+                print (curr)
+                print ('\n')
 
     return render_template('test.html', currs=currs)
 

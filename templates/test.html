@@ -106,12 +106,12 @@
             {% if currs %}
               {% for curr in currs %}
                 <tr>
-                  <td>curr.to</td>
-                  <td>curr.from</td>
-                  <td>curr.ask</td>
-                  <td>curr.bid</td>
-                  <td>curr.price</td>
-                  <td>curr.time</td>
+                  <td>{{curr.to}}</td>
+                  <td>{{curr.from}}</td>
+                  <td>{{curr.ask}}</td>
+                  <td>{{curr.bid}}</td>
+                  <td>{{curr.price}}</td>
+                  <td>{{curr.timestamp}}</td>
                 </tr>
               {% endfor %}
             {% endif %}
