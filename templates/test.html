@@ -20,7 +20,7 @@
   <div class="row">
 
     <div class="col-sm-4">
-      <form action="{{ url_for('currs') }}" method='post' role='form'>
+      <form action="{{ url_for('home') }}" method='post' role='form'>
         <fieldset>
           <div class="text-center">
             <div class="col-sm-4">
@@ -103,31 +103,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-          </tbody>
+            {% if currs %}
+              {% for curr in currs %}
+                <tr>
+                  <td>curr.to</td>
+                  <td>curr.from</td>
+                  <td>curr.ask</td>
+                  <td>curr.bid</td>
+                  <td>curr.price</td>
+                  <td>curr.time</td>
+                </tr>
+              {% endfor %}
+            {% endif %}
+            </tbody>
         </table>
     </div>
 
