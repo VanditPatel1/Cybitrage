@@ -36,7 +36,7 @@ class weighted_graph:
     def __init__(self, currs):
 
         self.currencies = currs                                         # list of currencies
-        self.curr_df, self.curr_matrix = get_data(currs)                # currency data frame (with listings of all edges)
+        self.curr_df, self.curr_matrix, self.table_dict = get_data(currs)                # currency data frame (with listings of all edges)
         #print('TESTING WEIGHTED GRAPH')
         #print (self.curr_df)
         #print ('\n')

@@ -1,17 +1,31 @@
+/*
+$(function() {
+  $('button#currs').bind('click', function() {
+    $.getJSON($SCRIPT_ROOT + 'get_curr',{
+      var myCurrs = new Array();
+      $('input:checked').each(function() {
+        data['currencies'].push($(this).val());
+      })
+    }, function() {
+
+    });
+    return true;
+  });
+});
 
 $(function() {
-    $('button').click(function() {
-        var currs = $('#txtCurrenices').val();
-        $.ajax({
-            url: '/currs',
-            data: $('form').serialize(),
-            type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
+  $('button#currs').bind('click', function() {
+    $.post($SCRIPT_ROOT + 'get_curr',{
+      var myCurrs = new Array();
+      $('input:checked').each(function() {
+        data['currencies'].push($(this).val());
+      })
+    },
+    function(data){
+
     });
+
+  });
 });
+
+*/

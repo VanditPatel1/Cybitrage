@@ -31,7 +31,6 @@ class weighted_graph:
 
 
     def get_weight(self, row, column):
-
         return self.curr_matrix.loc[row, column]
 
 
@@ -39,7 +38,7 @@ class weighted_graph:
 
         if dist[next] > dist[node] + self.get_weight(node, next):
             dist[next] = dist[node] + self.get_weight(node, next)
-            pred[next] = node 
+            pred[next] = node
 
     def find_arb_opp(self):
 
@@ -57,4 +56,3 @@ class weighted_graph:
 
 w = weighted_graph(['USD', 'CAD', 'GBP', 'JPY', 'AUD'])
 w.find_arb_opp()
-
